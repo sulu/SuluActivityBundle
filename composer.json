@@ -1,0 +1,19 @@
+{
+    "name": "massive/activity-bundle",
+    "type": "sulu-bundle",
+    "description": "This bundle appends activities to the standard contact bundle",
+    "license": "MIT",
+    "keywords": ["contact", "crm", "activity"],
+    "require": {
+        "php": ">=5.4",
+        "sulu/sulu": "dev-develop"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-0": {
+            "Massive\\Bundle\\ActivityBundle": ""
+        }
+    },
+    "target-dir": "Massive/Bundle/ActivityBundle"
+}

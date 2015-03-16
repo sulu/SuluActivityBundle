@@ -11,9 +11,9 @@
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Massive\Bundle\ActivityBundle\Entity\ActivityStatus;
+use Massive\Bundle\ActivityBundle\Entity\ActivityPriority;
 
-class LoadActivityStatuses implements FixtureInterface, OrderedFixtureInterface
+class LoadActivityPriorities implements FixtureInterface, OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
@@ -21,30 +21,30 @@ class LoadActivityStatuses implements FixtureInterface, OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         // force id = 1
-        $metadata = $manager->getClassMetaData(get_class(new ActivityStatus()));
+        $metadata = $manager->getClassMetaData(get_class(new ActivityPriority()));
         $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
 
-        $file = dirname(__FILE__) . '/activityStatuses.xml';
+        $file = dirname(__FILE__) . '/../activityPriorities.xml';
         $doc = new DOMDocument();
         $doc->load($file);
 
         $xpath = new DOMXpath($doc);
-        $elements = $xpath->query('/ActivityStatuses/ActivityStatus');
+        $elements = $xpath->query('/ActivityPriorities/ActivityPriority');
 
         if (!is_null($elements)) {
             /** @var $element DOMNode */
             foreach ($elements as $element) {
-                $status = new ActivityStatus();
+                $priority = new ActivityPriority();
                 $children = $element->childNodes;
                 /** @var $child DOMNode */
                 foreach ($children as $child) {
                     if (isset($child->nodeName)) {
                         if ($child->nodeName == "Name") {
-                            $status->setName($child->nodeValue);
+                            $priority->setName($child->nodeValue);
                         }
                     }
                 }
-                $manager->persist($status);
+                $manager->persist($priority);
             }
         }
 

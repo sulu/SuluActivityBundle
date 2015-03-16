@@ -11,9 +11,9 @@
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Massive\Bundle\ActivityBundle\Entity\ActivityPriority;
+use Massive\Bundle\ActivityBundle\Entity\ActivityStatus;
 
-class LoadActivityPriorities implements FixtureInterface, OrderedFixtureInterface
+class LoadActivityStatuses implements FixtureInterface, OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
@@ -21,30 +21,30 @@ class LoadActivityPriorities implements FixtureInterface, OrderedFixtureInterfac
     public function load(ObjectManager $manager)
     {
         // force id = 1
-        $metadata = $manager->getClassMetaData(get_class(new ActivityPriority()));
+        $metadata = $manager->getClassMetaData(get_class(new ActivityStatus()));
         $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
 
-        $file = dirname(__FILE__) . '/activityPriorities.xml';
+        $file = dirname(__FILE__) . '/../activityStatuses.xml';
         $doc = new DOMDocument();
         $doc->load($file);
 
         $xpath = new DOMXpath($doc);
-        $elements = $xpath->query('/ActivityPriorities/ActivityPriority');
+        $elements = $xpath->query('/ActivityStatuses/ActivityStatus');
 
         if (!is_null($elements)) {
             /** @var $element DOMNode */
             foreach ($elements as $element) {
-                $priority = new ActivityPriority();
+                $status = new ActivityStatus();
                 $children = $element->childNodes;
                 /** @var $child DOMNode */
                 foreach ($children as $child) {
                     if (isset($child->nodeName)) {
                         if ($child->nodeName == "Name") {
-                            $priority->setName($child->nodeValue);
+                            $status->setName($child->nodeValue);
                         }
                     }
                 }
-                $manager->persist($priority);
+                $manager->persist($status);
             }
         }
 

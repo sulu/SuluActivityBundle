@@ -24,7 +24,7 @@ class LoadActivityTypes implements FixtureInterface, OrderedFixtureInterface
         $metadata = $manager->getClassMetaData(get_class(new ActivityType()));
         $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
 
-        $file = dirname(__FILE__) . '/activityTypes.xml';
+        $file = dirname(__FILE__) . '/../activityTypes.xml';
         $doc = new DOMDocument();
         $doc->load($file);
 

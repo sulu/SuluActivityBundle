@@ -26,8 +26,10 @@ class MassiveActivityContentNavigation implements ContentNavigationInterface
         // contact activities tab
         $contactActivities = new ContentNavigationItem('content-navigation.contacts.activities');
         $contactActivities->setAction('activities');
-        $contactActivities->setComponent('contacts@sulucontact');
-        $contactActivities->setComponentOptions(array('display'=>'activities'));
+        $contactActivities->setComponent('activities@massiveactivity');
+        $contactActivities->setComponentOptions(
+            array('type' => 'contact', 'widgetGroup' => 'contact-detail', 'instanceName' => 'contact-activities')
+        );
         $contactActivities->setDisplay(array('edit'));
         $contactActivities->setGroups(array('contact'));
         $contactActivities->setPosition(2);
@@ -36,8 +38,11 @@ class MassiveActivityContentNavigation implements ContentNavigationInterface
         $accountActivities = new ContentNavigationItem('content-navigation.contacts.activities');
         $accountActivities->setAction('activities');
         $accountActivities->setGroups(array('account'));
-        $accountActivities->setComponent('accounts@sulucontact');
-        $accountActivities->setComponentOptions(array('display'=>'activities'));
+        $accountActivities->setComponent('activities@massiveactivity');
+        $accountActivities->setComponentOptions(
+            array('type' => 'account', 'widgetGroup' => 'account-detail', 'instanceName' => 'account-activities')
+        );
+        $accountActivities->setComponentOptions(array('display' => 'activities'));
         $accountActivities->setDisplay(array('edit'));
         $accountActivities->setPosition(2);
 

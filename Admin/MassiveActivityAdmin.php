@@ -22,4 +22,9 @@ class MassiveActivityAdmin extends Admin
 
         $this->setNavigation(new Navigation($rootNavigationItem));
     }
+
+    public function getJsBundleName()
+    {
+        return 'massiveactivity';
+    }
 }

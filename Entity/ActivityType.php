@@ -83,10 +83,10 @@ class ActivityType extends ApiEntity implements \JsonSerializable
     /**
      * Add activities
      *
-     * @param \Sulu\Bundle\ContactBundle\Entity\Activity $activities
+     * @param Activity $activities
      * @return ActivityType
      */
-    public function addActivitie(\Sulu\Bundle\ContactBundle\Entity\Activity $activities)
+    public function addActivitie(Activity $activities)
     {
         $this->activities[] = $activities;
 
@@ -96,9 +96,9 @@ class ActivityType extends ApiEntity implements \JsonSerializable
     /**
      * Remove activities
      *
-     * @param \Sulu\Bundle\ContactBundle\Entity\Activity $activities
+     * @param Activity $activities
      */
-    public function removeActivitie(\Sulu\Bundle\ContactBundle\Entity\Activity $activities)
+    public function removeActivitie(Activity $activities)
     {
         $this->activities->removeElement($activities);
     }
@@ -131,10 +131,10 @@ class ActivityType extends ApiEntity implements \JsonSerializable
     /**
      * Add activities
      *
-     * @param \Sulu\Bundle\ContactBundle\Entity\Activity $activities
+     * @param Activity $activities
      * @return ActivityType
      */
-    public function addActivity(\Sulu\Bundle\ContactBundle\Entity\Activity $activities)
+    public function addActivity(Activity $activities)
     {
         $this->activities[] = $activities;
 
@@ -144,9 +144,9 @@ class ActivityType extends ApiEntity implements \JsonSerializable
     /**
      * Remove activities
      *
-     * @param \Sulu\Bundle\ContactBundle\Entity\Activity $activities
+     * @param Activity $activities
      */
-    public function removeActivity(\Sulu\Bundle\ContactBundle\Entity\Activity $activities)
+    public function removeActivity(Activity $activities)
     {
         $this->activities->removeElement($activities);
     }

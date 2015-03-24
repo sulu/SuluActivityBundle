@@ -8,18 +8,19 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Sulu\Bundle\ContactBundle\Tests\Functional\Controller;
+namespace Massive\Bundle\ActivityBundle\Tests\Functional\Controller;
 
 use Doctrine\ORM\EntityManager;
 
+use Sulu\Bundle\ContactBundle\Entity\AccountInterface;
 use Sulu\Bundle\ContactBundle\Entity\Account;
 use Sulu\Bundle\ContactBundle\Entity\Contact;
 use Sulu\Bundle\ContactBundle\Entity\Email;
 use Sulu\Bundle\ContactBundle\Entity\EmailType;
-use Sulu\Bundle\ContactBundle\Entity\Activity;
-use Sulu\Bundle\ContactBundle\Entity\ActivityPriority;
-use Sulu\Bundle\ContactBundle\Entity\ActivityStatus;
-use Sulu\Bundle\ContactBundle\Entity\ActivityType;
+use Massive\Bundle\ActivityBundle\Entity\Activity;
+use Massive\Bundle\ActivityBundle\Entity\ActivityPriority;
+use Massive\Bundle\ActivityBundle\Entity\ActivityStatus;
+use Massive\Bundle\ActivityBundle\Entity\ActivityType;
 use Sulu\Bundle\TestBundle\Testing\SuluTestCase;
 
 class ActivityControllerTest extends SuluTestCase
@@ -30,7 +31,7 @@ class ActivityControllerTest extends SuluTestCase
     private $em;
 
     /**
-     * @var Account
+     * @var AccountInterface
      */
     private $account;
 

@@ -12,7 +12,7 @@ namespace Massive\Bundle\ActivityBundle\Api;
 
 use Sulu\Bundle\ContactBundle\Api\Account;
 use Sulu\Bundle\ContactBundle\Api\Contact;
-use Sulu\Bundle\ContactBundle\Entity\Account as AccountEntity;
+use Sulu\Bundle\ContactBundle\Entity\AccountInterface as AccountEntity;
 use Massive\Bundle\ActivityBundle\Entity\Activity as ActivityEntity;
 use Massive\Bundle\ActivityBundle\Entity\ActivityPriority as ActivityPriorityEntity;
 use Massive\Bundle\ActivityBundle\Entity\ActivityStatus as ActivityStatusEntity;

@@ -12,7 +12,7 @@ namespace Massive\Bundle\ActivityBundle\Entity;
 
 use JMS\Serializer\Annotation\Exclude;
 use Sulu\Bundle\ContactBundle\Entity\Contact;
-use Sulu\Bundle\ContactBundle\Entity\Account;
+use Sulu\Bundle\ContactBundle\Entity\AccountInterface;
 use Sulu\Bundle\CoreBundle\Entity\ApiEntity;
 use Sulu\Component\Security\Authentication\UserInterface;
 
@@ -77,7 +77,7 @@ class Activity extends ApiEntity
     private $contact;
 
     /**
-     * @var Account
+     * @var AccountInterface
      */
     private $account;
 
@@ -341,10 +341,10 @@ class Activity extends ApiEntity
     /**
      * Set account
      *
-     * @param Account $account
+     * @param AccountInterface $account
      * @return Activity
      */
-    public function setAccount(Account $account = null)
+    public function setAccount(AccountInterface $account = null)
     {
         $this->account = $account;
 
@@ -354,7 +354,7 @@ class Activity extends ApiEntity
     /**
      * Get account
      *
-     * @return Account
+     * @return AccountInterface
      */
     public function getAccount()
     {

@@ -18,11 +18,12 @@ use Massive\Bundle\ActivityBundle\Entity\ActivityStatus;
 use Massive\Bundle\ActivityBundle\Entity\ActivityPriority;
 use Massive\Bundle\ActivityBundle\Entity\ActivityType;
 use Sulu\Bundle\ContactBundle\Entity\Contact;
-use Sulu\Bundle\ContactBundle\Entity\Account;
+use Sulu\Bundle\ContactBundle\Entity\AccountInterface;
 use Sulu\Component\Rest\Exception\EntityNotFoundException;
 use Sulu\Component\Rest\Exception\RestException;
 use Sulu\Component\Rest\ListBuilder\Doctrine\DoctrineListBuilderFactory;
 use Sulu\Component\Rest\RestController;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Sulu\Component\Rest\RestHelperInterface;
 use Hateoas\Representation\CollectionRepresentation;
@@ -44,7 +45,7 @@ class ActivityController extends RestController implements ClassResourceInterfac
     protected static $activityTypeEntityName = 'MassiveActivityBundle:ActivityType';
     protected static $activityPriorityEntityName = 'MassiveActivityBundle:ActivityPriority';
     protected static $contactEntityName = 'SuluContactBundle:Contact';
-    protected static $accountEntityName = 'SuluContactBundle:Account';
+    protected $accountEntityName;
 
     /**
      * @var string
@@ -65,8 +66,12 @@ class ActivityController extends RestController implements ClassResourceInterfac
     /**
      * TODO: move field descriptors to a manager
      */
-    public function __construct()
+    public function setContainer(ContainerInterface $container = null)
     {
+        parent::setContainer($container);
+
+        $this->accountEntityName = $this->container->getParameter('sulu_contact.account.entity');
+
         $this->fieldDescriptors = array();
         $this->joinDescriptors = array();
         $this->fieldDescriptors['id'] = new DoctrineFieldDescriptor(
@@ -250,11 +255,11 @@ class ActivityController extends RestController implements ClassResourceInterfac
         $this->joinDescriptors['account'] = new DoctrineFieldDescriptor(
             'id',
             'account',
-            self::$accountEntityName,
+            $this->accountEntityName,
             '',
             array(
-                self::$accountEntityName => new DoctrineJoinDescriptor(
-                        self::$accountEntityName,
+                $this->accountEntityName => new DoctrineJoinDescriptor(
+                        $this->accountEntityName,
                         self::$entityName . '.account'
                     )
             ),
@@ -527,9 +532,9 @@ class ActivityController extends RestController implements ClassResourceInterfac
             $activity->setStartDate(new \DateTime($startDate));
         }
         if (!is_null($belongsToAccount)) {
-            /* @var Account $account */
+            /* @var AccountInterface $account */
             $account = $this->getEntityById(
-                self::$accountEntityName,
+                $this->accountEntityName,
                 $belongsToAccount['id']
             );
             $activity->setAccount($account);
@@ -545,8 +550,7 @@ class ActivityController extends RestController implements ClassResourceInterfac
                 $activity->setAccount(null);
             } else {
                 throw new RestException(
-                    'No account or contact set!',
-                    self::$entityName
+                    'No account or contact set!'
                 );
             }
         }

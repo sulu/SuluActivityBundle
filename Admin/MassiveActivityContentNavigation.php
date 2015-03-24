@@ -42,7 +42,6 @@ class MassiveActivityContentNavigation implements ContentNavigationInterface
         $accountActivities->setComponentOptions(
             array('type' => 'account', 'widgetGroup' => 'account-detail', 'instanceName' => 'account-activities')
         );
-        $accountActivities->setComponentOptions(array('display' => 'activities'));
         $accountActivities->setDisplay(array('edit'));
         $accountActivities->setPosition(2);
 

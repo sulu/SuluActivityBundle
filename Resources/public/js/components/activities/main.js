@@ -266,11 +266,11 @@ define([
                     var data = this.sandbox.form.getData(constants.activityFormSelector);
 
                     if (!!this.isContact() && !data.contact) {
-                        data.contact = this.options.id;
+                        data.contact = {id: this.options.id};
                     }
 
                     if (!!this.isAccount() && !data.account) {
-                        data.account = this.options.id;
+                        data.account = {id: this.options.id};
                     }
 
                     if (!data.id) {

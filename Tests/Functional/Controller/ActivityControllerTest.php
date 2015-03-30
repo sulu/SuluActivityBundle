@@ -86,7 +86,6 @@ class ActivityControllerTest extends SuluTestCase
     {
         $account = new Account();
         $account->setName('Company');
-        $account->setType(Account::TYPE_BASIC);
         $account->setDisabled(0);
         $account->setCreated(new \DateTime());
         $account->setChanged(new \DateTime());

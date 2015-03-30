@@ -67,10 +67,10 @@ define([
             layout: function() {
                 return {
                     content: {
-                        width: (WidgetGroups.exists(this.options.widgetGroup) ? 'max' : 'fixed')
+                        width: 'fixed'
                     },
                     sidebar: {
-                        width: 'fixed',
+                        width: 'max',
                         cssClasses: 'sidebar-padding-50'
                     }
                 };

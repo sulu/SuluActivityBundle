@@ -8,15 +8,15 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Massive\Bundle\ActivityBundle\Api;
+namespace Sulu\Bundle\ActivityBundle\Api;
 
 use Sulu\Bundle\ContactBundle\Api\Account;
 use Sulu\Bundle\ContactBundle\Api\Contact;
 use Sulu\Bundle\ContactBundle\Entity\AccountInterface as AccountEntity;
-use Massive\Bundle\ActivityBundle\Entity\Activity as ActivityEntity;
-use Massive\Bundle\ActivityBundle\Entity\ActivityPriority as ActivityPriorityEntity;
-use Massive\Bundle\ActivityBundle\Entity\ActivityStatus as ActivityStatusEntity;
-use Massive\Bundle\ActivityBundle\Entity\ActivityType as ActivityTypeEntity;
+use Sulu\Bundle\ActivityBundle\Entity\Activity as ActivityEntity;
+use Sulu\Bundle\ActivityBundle\Entity\ActivityPriority as ActivityPriorityEntity;
+use Sulu\Bundle\ActivityBundle\Entity\ActivityStatus as ActivityStatusEntity;
+use Sulu\Bundle\ActivityBundle\Entity\ActivityType as ActivityTypeEntity;
 use Sulu\Bundle\ContactBundle\Entity\Contact as ContactEntity;
 use Sulu\Component\Rest\ApiWrapper;
 use JMS\Serializer\Annotation\VirtualProperty;

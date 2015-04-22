@@ -11,7 +11,7 @@
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Massive\Bundle\ActivityBundle\Entity\ActivityType;
+use Sulu\Bundle\ActivityBundle\Entity\ActivityType;
 
 class LoadActivityTypes implements FixtureInterface, OrderedFixtureInterface
 {

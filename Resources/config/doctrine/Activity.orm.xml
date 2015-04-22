@@ -3,7 +3,7 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Massive\Bundle\ActivityBundle\Entity\Activity" table="co_activities" repository-class="Massive\Bundle\ActivityBundle\Entity\ActivityRepository">
+    <entity name="Sulu\Bundle\ActivityBundle\Entity\Activity" table="co_activities" repository-class="Sulu\Bundle\ActivityBundle\Entity\ActivityRepository">
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
@@ -29,21 +29,21 @@
             </join-columns>
         </many-to-one>
 
-        <many-to-one field="activityStatus" target-entity="Massive\Bundle\ActivityBundle\Entity\ActivityStatus"
+        <many-to-one field="activityStatus" target-entity="Sulu\Bundle\ActivityBundle\Entity\ActivityStatus"
                      inversed-by="activities">
             <join-columns>
                 <join-column name="idActivityStatuses" referenced-column-name="id" nullable="true"/>
             </join-columns>
         </many-to-one>
 
-        <many-to-one field="activityPriority" target-entity="Massive\Bundle\ActivityBundle\Entity\ActivityPriority"
+        <many-to-one field="activityPriority" target-entity="Sulu\Bundle\ActivityBundle\Entity\ActivityPriority"
                      inversed-by="activities">
             <join-columns>
                 <join-column name="idActivityPriorities" referenced-column-name="id" nullable="true"/>
             </join-columns>
         </many-to-one>
 
-        <many-to-one field="activityType" target-entity="Massive\Bundle\ActivityBundle\Entity\ActivityType"
+        <many-to-one field="activityType" target-entity="Sulu\Bundle\ActivityBundle\Entity\ActivityType"
                      inversed-by="activities">
             <join-columns>
                 <join-column name="idActivityTypes" referenced-column-name="id" nullable="true"/>

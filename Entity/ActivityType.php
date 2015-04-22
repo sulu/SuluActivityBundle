@@ -8,7 +8,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Massive\Bundle\ActivityBundle\Entity;
+namespace Sulu\Bundle\ActivityBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

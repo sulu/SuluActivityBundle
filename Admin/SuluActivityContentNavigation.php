@@ -8,7 +8,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Massive\Bundle\ActivityBundle\Admin;
+namespace Sulu\Bundle\ActivityBundle\Admin;
 
 use Sulu\Bundle\AdminBundle\Navigation\ContentNavigationInterface;
 use Sulu\Bundle\AdminBundle\Navigation\ContentNavigationItem;
@@ -17,7 +17,7 @@ use Sulu\Component\Security\Authorization\SecurityCheckerInterface;
 /**
  * Extends contact and account form with activities
  */
-class MassiveActivityContentNavigation implements ContentNavigationInterface
+class SuluActivityContentNavigation implements ContentNavigationInterface
 {
     private $navigation = array();
 
@@ -26,7 +26,7 @@ class MassiveActivityContentNavigation implements ContentNavigationInterface
         // contact activities tab
         $contactActivities = new ContentNavigationItem('content-navigation.contacts.activities');
         $contactActivities->setAction('activities');
-        $contactActivities->setComponent('activities@massiveactivity');
+        $contactActivities->setComponent('activities@suluactivity');
         $contactActivities->setComponentOptions(
             array('type' => 'contact', 'widgetGroup' => 'contact-detail', 'instanceName' => 'contact-activities')
         );

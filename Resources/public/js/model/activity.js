@@ -12,9 +12,9 @@ define([
     'sulucontact/model/account',
     'mvc/hasone',
     'sulucontact/model/contact',
-    'massiveactivity/model/activityPriority',
-    'massiveactivity/model/activityType',
-    'massiveactivity/model/activityStatus'
+    'suluactivity/model/activityPriority',
+    'suluactivity/model/activityType',
+    'suluactivity/model/activityStatus'
 ], function(RelationalModel, Account, HasOne, Contact, ActivityPriority, ActivityStatus, ActivityType) {
 
     'use strict';

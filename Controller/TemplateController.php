@@ -8,7 +8,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Massive\Bundle\ActivityBundle\Controller;
+namespace Sulu\Bundle\ActivityBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -22,7 +22,7 @@ class TemplateController extends Controller
     {
         $values = $this->getActivityDropdownValues();
 
-        return $this->render('MassiveActivityBundle:Template:contact.activities.html.twig', $values);
+        return $this->render('SuluActivityBundle:Template:contact.activities.html.twig', $values);
     }
 
     /**
@@ -34,15 +34,15 @@ class TemplateController extends Controller
         $values = array();
 
         $values['activityTypes'] = $this->getDoctrine()
-            ->getRepository('MassiveActivityBundle:ActivityType')
+            ->getRepository('SuluActivityBundle:ActivityType')
             ->findAll();
 
         $values['activityPriorities'] = $this->getDoctrine()
-            ->getRepository('MassiveActivityBundle:ActivityPriority')
+            ->getRepository('SuluActivityBundle:ActivityPriority')
             ->findAll();
 
         $values['activityStatuses'] = $this->getDoctrine()
-            ->getRepository('MassiveActivityBundle:ActivityStatus')
+            ->getRepository('SuluActivityBundle:ActivityStatus')
             ->findAll();
 
         return $values;

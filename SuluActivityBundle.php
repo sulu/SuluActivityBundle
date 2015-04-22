@@ -8,12 +8,11 @@
 * with this source code in the file LICENSE.
 */
 
-namespace Massive\Bundle\ActivityBundle;
+namespace Sulu\Bundle\ActivityBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class MassiveActivityBundle extends Bundle
+class SuluActivityBundle extends Bundle
 {
 }
-

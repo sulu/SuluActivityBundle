@@ -8,13 +8,13 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Massive\Bundle\ActivityBundle\Admin;
+namespace Sulu\Bundle\ActivityBundle\Admin;
 
 use Sulu\Bundle\AdminBundle\Admin\Admin;
 use Sulu\Bundle\AdminBundle\Navigation\Navigation;
 use Sulu\Bundle\AdminBundle\Navigation\NavigationItem;
 
-class MassiveActivityAdmin extends Admin
+class SuluActivityAdmin extends Admin
 {
     public function __construct($title)
     {
@@ -25,6 +25,6 @@ class MassiveActivityAdmin extends Admin
 
     public function getJsBundleName()
     {
-        return 'massiveactivity';
+        return 'suluactivity';
     }
 }

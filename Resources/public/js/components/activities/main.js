@@ -8,9 +8,9 @@
  */
 
 define([
-        'text!massiveactivity/components/activities/activity.form.html',
+        'text!suluactivity/components/activities/activity.form.html',
         'widget-groups',
-        'massiveactivity/model/activity'
+        'suluactivity/model/activity'
     ],
     function(ActivityForm, WidgetGroups, Activity) {
 
@@ -108,7 +108,7 @@ define([
 
             bindCustomEvents: function() {
                 // listen for defaults for types/statuses/prios
-                this.sandbox.once('massive_activity.activities.set-defaults',
+                this.sandbox.once('sulu_activity.activities.set-defaults',
                     function(defaults) {
                         var el, sub;
                         for (el in defaults) {

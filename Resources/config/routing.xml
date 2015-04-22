@@ -4,8 +4,8 @@
         xsi:schemaLocation="http://symfony.com/schema/routing
         http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="massive_activity.activity_list" pattern="/template/contact/activities.html">
-        <default key="_controller">MassiveActivityBundle:Template:contactActivities</default>
+    <route id="sulu_activity.activity_list" pattern="/template/contact/activities.html">
+        <default key="_controller">SuluActivityBundle:Template:contactActivities</default>
     </route>
 
 </routes>

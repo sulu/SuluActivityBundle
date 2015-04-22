@@ -8,15 +8,15 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Massive\Bundle\ActivityBundle\Controller;
+namespace Sulu\Bundle\ActivityBundle\Controller;
 
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use JMS\Serializer\SerializationContext;
-use Massive\Bundle\ActivityBundle\Entity\Activity as ActivityEntity;
-use Massive\Bundle\ActivityBundle\Api\Activity;
-use Massive\Bundle\ActivityBundle\Entity\ActivityStatus;
-use Massive\Bundle\ActivityBundle\Entity\ActivityPriority;
-use Massive\Bundle\ActivityBundle\Entity\ActivityType;
+use Sulu\Bundle\ActivityBundle\Entity\Activity as ActivityEntity;
+use Sulu\Bundle\ActivityBundle\Api\Activity;
+use Sulu\Bundle\ActivityBundle\Entity\ActivityStatus;
+use Sulu\Bundle\ActivityBundle\Entity\ActivityPriority;
+use Sulu\Bundle\ActivityBundle\Entity\ActivityType;
 use Sulu\Bundle\ContactBundle\Entity\Contact;
 use Sulu\Bundle\ContactBundle\Entity\AccountInterface;
 use Sulu\Component\Rest\Exception\EntityNotFoundException;
@@ -40,10 +40,10 @@ class ActivityController extends RestController implements ClassResourceInterfac
     /**
      * {@inheritdoc}
      */
-    protected static $entityName = 'MassiveActivityBundle:Activity';
-    protected static $activityStatusEntityName = 'MassiveActivityBundle:ActivityStatus';
-    protected static $activityTypeEntityName = 'MassiveActivityBundle:ActivityType';
-    protected static $activityPriorityEntityName = 'MassiveActivityBundle:ActivityPriority';
+    protected static $entityName = 'SuluActivityBundle:Activity';
+    protected static $activityStatusEntityName = 'SuluActivityBundle:ActivityStatus';
+    protected static $activityTypeEntityName = 'SuluActivityBundle:ActivityType';
+    protected static $activityPriorityEntityName = 'SuluActivityBundle:ActivityPriority';
     protected static $contactEntityName = 'SuluContactBundle:Contact';
     protected $accountEntityName;
 

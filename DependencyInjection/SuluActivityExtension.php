@@ -8,7 +8,7 @@
 * with this source code in the file LICENSE.
 */
 
-namespace Massive\Bundle\ActivityBundle\DependencyInjection;
+namespace Sulu\Bundle\ActivityBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class MassiveActivityExtension extends Extension
+class SuluActivityExtension extends Extension
 {
     /**
      * {@inheritDoc}

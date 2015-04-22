@@ -1,5 +1,5 @@
 {
-    "name": "massive/activity-bundle",
+    "name": "sulu/activity-bundle",
     "type": "sulu-bundle",
     "description": "This bundle appends activities to the standard contact bundle",
     "license": "MIT",
@@ -12,8 +12,8 @@
     },
     "autoload": {
         "psr-0": {
-            "Massive\\Bundle\\ActivityBundle": ""
+            "Sulu\\Bundle\\ActivityBundle": ""
         }
     },
-    "target-dir": "Massive/Bundle/ActivityBundle"
+    "target-dir": "Sulu/Bundle/ActivityBundle"
 }

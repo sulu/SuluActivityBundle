@@ -9,7 +9,7 @@
 
 require.config({
     paths: {
-        massiveactivity: '../../massiveactivity/js'
+        suluactivity: '../../suluactivity/js'
     }
 });
 
@@ -19,10 +19,10 @@ define(function() {
 
     return {
 
-        name: 'Massive Activity Bundle',
+        name: 'Sulu Activity Bundle',
 
         initialize: function(app) {
-            app.components.addSource('massiveactivity', '/bundles/massiveactivity/js/components');
+            app.components.addSource('suluactivity', '/bundles/suluactivity/js/components');
         }
     };
 });

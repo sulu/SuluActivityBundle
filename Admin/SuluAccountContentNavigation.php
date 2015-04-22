@@ -10,30 +10,27 @@
 
 namespace Sulu\Bundle\ActivityBundle\Admin;
 
-use Sulu\Bundle\AdminBundle\Navigation\ContentNavigationInterface;
+use Sulu\Bundle\AdminBundle\Navigation\ContentNavigationProviderInterface;
 use Sulu\Bundle\AdminBundle\Navigation\ContentNavigationItem;
 use Sulu\Component\Security\Authorization\SecurityCheckerInterface;
 
 /**
  * Extends contact and account form with activities
  */
-class SuluActivityContentNavigation implements ContentNavigationInterface
+class SuluAccountContentNavigation implements ContentNavigationProviderInterface
 {
-    private $navigation = array();
-
-    public function __construct()
+    /**
+     * @var SecurityCheckerInterface
+     */
+    private $securityChecker;
+    public function __construct(SecurityCheckerInterface $securityChecker)
     {
-        // contact activities tab
-        $contactActivities = new ContentNavigationItem('content-navigation.contacts.activities');
-        $contactActivities->setAction('activities');
-        $contactActivities->setComponent('activities@suluactivity');
-        $contactActivities->setComponentOptions(
-            array('type' => 'contact', 'widgetGroup' => 'contact-detail', 'instanceName' => 'contact-activities')
-        );
-        $contactActivities->setDisplay(array('edit'));
-        $contactActivities->setGroups(array('contact'));
-        $contactActivities->setPosition(2);
+        $this->securityChecker = $securityChecker;
+    }
 
+
+    public function getNavigationItems(array $options = array())
+    {
         // account activities tab
         $accountActivities = new ContentNavigationItem('content-navigation.contacts.activities');
         $accountActivities->setAction('activities');
@@ -45,13 +42,8 @@ class SuluActivityContentNavigation implements ContentNavigationInterface
         $accountActivities->setDisplay(array('edit'));
         $accountActivities->setPosition(2);
 
-        $this->navigation[] = $contactActivities;
-        $this->navigation[] = $accountActivities;
+        $result[] = $accountActivities;
 
-    }
-
-    public function getNavigationItems()
-    {
-        return $this->navigation;
+        return $result;
     }
 }

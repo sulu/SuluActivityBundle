@@ -4,6 +4,8 @@
     <parameters>
         <parameter key="sulu_activity.admin.class">Sulu\Bundle\ActivityBundle\Admin\SuluActivityAdmin</parameter>
         <parameter key="sulu_activity.admin.content_navigation.class">Sulu\Bundle\ActivityBundle\Admin\SuluActivityContentNavigation</parameter>
+        <parameter key="sulu_activity.contacts_content_navigation_provider.class">Sulu\Bundle\ActivityBundle\Admin\SuluContactContentNavigation</parameter>
+        <parameter key="sulu_activity.accounts_content_navigation_provider.class">Sulu\Bundle\ActivityBundle\Admin\SuluAccountContentNavigation</parameter>
     </parameters>
     <services>
         <service id="sulu_activity.admin" class="%sulu_activity.admin.class%">
@@ -12,8 +14,14 @@
             <tag name="sulu.admin"/>
             <tag name="sulu.context" context="admin"/>
         </service>
-        <service id="sulu_activity.admin.content_navigation" class="%sulu_activity.admin.content_navigation.class%">
-            <tag name="sulu.contact.admin.content_navigation"/>
+        <service id="sulu_activity.contacts_content_navigation_provider" class="%sulu_activity.contacts_content_navigation_provider.class%">
+            <argument type="service" id="sulu_security.security_checker"/>
+            <tag name="sulu_admin.content_navigation" alias="contact"/>
+            <tag name="sulu.context" context="admin"/>
+        </service>
+        <service id="sulu_activity.accounts_content_navigation_provider" class="%sulu_activity.contacts_content_navigation_provider.class%">
+            <argument type="service" id="sulu_security.security_checker"/>
+            <tag name="sulu_admin.content_navigation" alias="account"/>
             <tag name="sulu.context" context="admin"/>
         </service>
     </services>

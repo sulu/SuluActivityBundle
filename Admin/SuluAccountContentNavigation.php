@@ -35,7 +35,7 @@ class SuluAccountContentNavigation implements ContentNavigationProviderInterface
         $accountActivities = new ContentNavigationItem('content-navigation.contacts.activities');
         $accountActivities->setAction('activities');
         $accountActivities->setGroups(array('account'));
-        $accountActivities->setComponent('activities@massiveactivity');
+        $accountActivities->setComponent('activities@suluactivity');
         $accountActivities->setComponentOptions(
             array('type' => 'account', 'widgetGroup' => 'account-detail', 'instanceName' => 'account-activities')
         );

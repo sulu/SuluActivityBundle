@@ -38,11 +38,8 @@ class SuluContactContentNavigation implements ContentNavigationProviderInterface
             array('type' => 'contact', 'widgetGroup' => 'contact-detail', 'instanceName' => 'contact-activities')
         );
         $contactActivities->setDisplay(array('edit'));
-        // $contactActivities->setGroups(array('contact'));
         $contactActivities->setPosition(2);
 
-        $result[] = $contactActivities;
-
-        return $result;
+        return array($contactActivities);
     }
 }

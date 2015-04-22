@@ -23,6 +23,7 @@ class SuluAccountContentNavigation implements ContentNavigationProviderInterface
      * @var SecurityCheckerInterface
      */
     private $securityChecker;
+
     public function __construct(SecurityCheckerInterface $securityChecker)
     {
         $this->securityChecker = $securityChecker;
@@ -34,7 +35,6 @@ class SuluAccountContentNavigation implements ContentNavigationProviderInterface
         // account activities tab
         $accountActivities = new ContentNavigationItem('content-navigation.contacts.activities');
         $accountActivities->setAction('activities');
-        $accountActivities->setGroups(array('account'));
         $accountActivities->setComponent('activities@suluactivity');
         $accountActivities->setComponentOptions(
             array('type' => 'account', 'widgetGroup' => 'account-detail', 'instanceName' => 'account-activities')
@@ -42,8 +42,6 @@ class SuluAccountContentNavigation implements ContentNavigationProviderInterface
         $accountActivities->setDisplay(array('edit'));
         $accountActivities->setPosition(2);
 
-        $result[] = $accountActivities;
-
-        return $result;
+        return array($accountActivities);
     }
 }

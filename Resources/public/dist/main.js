@@ -1,1 +1,1 @@
-require.config({paths:{massiveactivity:"../../massiveactivity/js"}}),define(function(){"use strict";return{name:"Massive Activity Bundle",initialize:function(a){a.components.addSource("massiveactivity","/bundles/massiveactivity/js/components")}}});
+require.config({paths:{suluactivity:"../../suluactivity/js"}}),define(function(){"use strict";return{name:"Sulu Activity Bundle",initialize:function(a){a.components.addSource("suluactivity","/bundles/suluactivity/js/components")}}});

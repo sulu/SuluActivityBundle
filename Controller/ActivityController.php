@@ -250,7 +250,14 @@ class ActivityController extends RestController implements ClassResourceInterfac
                     )
                 ),
                 'assignedContact',
-                'contact.activities.assignedContact'
+                'contact.activities.assignedContact',
+                ' ',
+                false,
+                false,
+                '',
+                '',
+                '',
+                false
             );
         $this->joinDescriptors['account'] = new DoctrineFieldDescriptor(
             'id',

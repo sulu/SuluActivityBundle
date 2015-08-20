@@ -9,9 +9,9 @@
 
 define([
     'mvc/relationalmodel',
-    'sulucontact/model/account',
+    'sulucontact/models/account',
     'mvc/hasone',
-    'sulucontact/model/contact',
+    'sulucontact/models/contact',
     'suluactivity/model/activityPriority',
     'suluactivity/model/activityType',
     'suluactivity/model/activityStatus'

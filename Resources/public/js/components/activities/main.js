@@ -33,7 +33,7 @@ define([
                     {
                         id: 'add',
                         icon: 'plus-circle',
-                        class: 'highlight-white',
+                        class: 'highlight',
                         title: 'add',
                         position: 10,
                         callback: this.addOrEditActivity.bind(this)
@@ -41,7 +41,7 @@ define([
                     {
                         id: 'settings',
                         icon: 'gear',
-                        items: [
+                        dropdownItems: [
                             {
                                 id: 'delete',
                                 title: this.sandbox.translate('contact.activities.remove'),
@@ -144,11 +144,11 @@ define([
                     }.bind(this));
                 }.bind(this));
 
-                this.sandbox.dom.on('husky.datagrid.number.selections', function(number) {
+                this.sandbox.on('husky.datagrid.number.selections', function(number) {
                     if (number > 0) {
-                        this.sandbox.emit('husky.toolbar.activities.item.enable', 'delete');
+                        this.sandbox.emit('husky.toolbar.activities.item.enable', 'delete', false);
                     } else {
-                        this.sandbox.emit('husky.toolbar.activities.item.disable', 'delete');
+                        this.sandbox.emit('husky.toolbar.activities.item.disable', 'delete', false);
                     }
                 }.bind(this));
             },

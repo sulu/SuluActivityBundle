@@ -19,7 +19,7 @@
             <tag name="sulu_admin.content_navigation" alias="contact"/>
             <tag name="sulu.context" context="admin"/>
         </service>
-        <service id="sulu_activity.accounts_content_navigation_provider" class="%sulu_activity.contacts_content_navigation_provider.class%">
+        <service id="sulu_activity.accounts_content_navigation_provider" class="%sulu_activity.accounts_content_navigation_provider.class%">
             <argument type="service" id="sulu_security.security_checker"/>
             <tag name="sulu_admin.content_navigation" alias="account"/>
             <tag name="sulu.context" context="admin"/>

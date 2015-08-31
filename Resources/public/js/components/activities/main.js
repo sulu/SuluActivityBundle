@@ -10,9 +10,12 @@
 define([
         'text!suluactivity/components/activities/activity.form.html',
         'widget-groups',
-        'suluactivity/model/activity'
+        'suluactivity/model/activity',
+        'config',
+        'sulucontact/model/contact',
+        'sulucontact/model/account'
     ],
-    function(ActivityForm, WidgetGroups, Activity) {
+    function(ActivityForm, WidgetGroups, Activity, Config, Contact, Account) {
 
         'use strict';
 
@@ -80,13 +83,55 @@ define([
 
             initialize: function() {
                 this.getSystemMembers().then(function() {
-                    this.bindCustomEvents();
-                    this.render();
+                    this.initTypeDependentVariables(this.options.type);
+                    this.dfdEntityLoaded = this.sandbox.data.deferred();
+                    this.loadEntity();
 
-                    if (WidgetGroups.exists(this.options.widgetGroup)) {
-                        this.initSidebar(this.options.widgetGroup, this.options.id);
-                    }
+                    this.sandbox.dom.when(this.dfdEntityLoaded).then(function() {
+                        this.bindCustomEvents();
+                        this.render();
+
+                        if (WidgetGroups.exists(this.options.widgetGroup)) {
+                            this.initSidebar(this.options.widgetGroup, this.options.id);
+                        }
+                    }.bind(this));
                 }.bind(this));
+            },
+
+            /**
+             * Loads the entity according to the given type and id
+             */
+            loadEntity: function() {
+                this.entity.fetch({
+                    success: function(model) {
+                        this.model = model.toJSON();
+                        this.dfdEntityLoaded.resolve();
+                    }.bind(this),
+                    error: function() {
+                        this.sandbox.logger.log('error while fetching ' + this.options.type);
+                        this.dfdEntityLoaded.reject();
+                    }.bind(this)
+                });
+            },
+
+            /**
+             * Initializes the type dependend variables
+             *
+             * @param type
+             */
+            initTypeDependentVariables: function(type) {
+                switch (type) {
+                    case 'contact':
+                        this.breadcrumb = Config.get('sulucontact.breadcrumb.contact');
+                        this.entity = new Contact({id: this.options.id});
+                        this.routeToList = Config.get('sulucontact.routeToList.contact');
+                        break;
+                    case 'account':
+                        this.breadcrumb = Config.get('sulucontact.breadcrumb.account');
+                        this.entity = new Account({id: this.options.id});
+                        this.routeToList = Config.get('sulucontact.routeToList.account');
+                        break;
+                }
             },
 
             /**
@@ -130,7 +175,7 @@ define([
 
                 // back to list
                 this.sandbox.on('sulu.header.back', function() {
-                    this.sandbox.emit('sulu.router.navigate', this.getListRoute());
+                    this.sandbox.emit('sulu.router.navigate', this.routeToList);
                 }, this);
 
                 // set data in overlay
@@ -176,14 +221,18 @@ define([
              */
             setTitle: function() {
                 var title = this.sandbox.translate('contact.contacts.title'),
-                    breadcrumb = [
-                        {title: 'navigation.contacts'},
-                        {title: 'contact.contacts.title', event: 'sulu.header.back'}
-                    ];
+                    breadcrumb = this.breadcrumb;
 
-                if (!!this.options.contact && !!this.options.contact.id) {
-                    title = this.options.contact.fullName;
-                    breadcrumb.push({title: '#' + this.options.contact.id});
+                if (!!this.options.id) {
+                    switch (this.options.type) {
+                        case 'contact':
+                            title = this.model.fullName;
+                            break;
+                        case 'account':
+                            title = this.model.name;
+                            break;
+                    }
+                    breadcrumb.push({title: '#' + this.options.id});
                 }
 
                 this.sandbox.emit('sulu.header.set-title', title);
@@ -396,14 +445,6 @@ define([
 
             isContact: function() {
                 return this.options.type === 'contact';
-            },
-
-            getListRoute: function() {
-                if (this.isContact()) {
-                    return 'contacts/contacts';
-                } else {
-                    return 'contacts/accounts';
-                }
             },
 
             /**

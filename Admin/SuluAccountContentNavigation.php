@@ -29,7 +29,6 @@ class SuluAccountContentNavigation implements ContentNavigationProviderInterface
         $this->securityChecker = $securityChecker;
     }
 
-
     public function getNavigationItems(array $options = array())
     {
         // account activities tab

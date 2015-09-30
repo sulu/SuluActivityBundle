@@ -12,8 +12,8 @@ define([
         'widget-groups',
         'suluactivity/model/activity',
         'config',
-        'sulucontact/model/contact',
-        'sulucontact/model/account'
+        'sulucontact/models/contact',
+        'sulucontact/models/account'
     ],
     function(ActivityForm, WidgetGroups, Activity, Config, Contact, Account) {
 
@@ -122,12 +122,10 @@ define([
             initTypeDependentVariables: function(type) {
                 switch (type) {
                     case 'contact':
-                        this.breadcrumb = Config.get('sulucontact.breadcrumb.contact');
                         this.entity = new Contact({id: this.options.id});
                         this.routeToList = Config.get('sulucontact.routeToList.contact');
                         break;
                     case 'account':
-                        this.breadcrumb = Config.get('sulucontact.breadcrumb.account');
                         this.entity = new Account({id: this.options.id});
                         this.routeToList = Config.get('sulucontact.routeToList.account');
                         break;
@@ -220,8 +218,7 @@ define([
              * default title as fallback
              */
             setTitle: function() {
-                var title = this.sandbox.translate('contact.contacts.title'),
-                    breadcrumb = this.breadcrumb;
+                var title = this.sandbox.translate('contact.contacts.title');
 
                 if (!!this.options.id) {
                     switch (this.options.type) {
@@ -232,11 +229,9 @@ define([
                             title = this.model.name;
                             break;
                     }
-                    breadcrumb.push({title: '#' + this.options.id});
                 }
 
                 this.sandbox.emit('sulu.header.set-title', title);
-                this.sandbox.emit('sulu.header.set-breadcrumb', breadcrumb);
             },
 
             /**

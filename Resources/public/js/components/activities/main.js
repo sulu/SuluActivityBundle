@@ -12,8 +12,8 @@ define([
         'widget-groups',
         'suluactivity/model/activity',
         'config',
-        'sulucontact/model/contact',
-        'sulucontact/model/account'
+        'sulucontact/models/contact',
+        'sulucontact/models/account'
     ],
     function(ActivityForm, WidgetGroups, Activity, Config, Contact, Account) {
 

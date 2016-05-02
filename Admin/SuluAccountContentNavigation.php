@@ -29,18 +29,25 @@ class SuluAccountContentNavigation implements ContentNavigationProviderInterface
         $this->securityChecker = $securityChecker;
     }
 
-    public function getNavigationItems(array $options = array())
+    /**
+     * {@inheritdoc}
+     */
+    public function getNavigationItems(array $options = [])
     {
         // account activities tab
         $accountActivities = new ContentNavigationItem('content-navigation.contacts.activities');
         $accountActivities->setAction('activities');
+        $accountActivities->setPosition(70);
         $accountActivities->setComponent('activities@suluactivity');
         $accountActivities->setComponentOptions(
-            array('type' => 'account', 'widgetGroup' => 'account-detail', 'instanceName' => 'account-activities')
+            [
+                'type' => 'account',
+                'widgetGroup' => 'account-detail',
+                'instanceName' => 'account-activities'
+            ]
         );
-        $accountActivities->setDisplay(array('edit'));
-        $accountActivities->setPosition(2);
+        $accountActivities->setDisplay(['edit']);
 
-        return array($accountActivities);
+        return [$accountActivities];
     }
 }

@@ -28,18 +28,25 @@ class SuluContactContentNavigation implements ContentNavigationProviderInterface
         $this->securityChecker = $securityChecker;
     }
 
-    public function getNavigationItems(array $options = array())
+    /**
+     * {@inheritdoc}
+     */
+    public function getNavigationItems(array $options = [])
     {
         // contact activities tab
         $contactActivities = new ContentNavigationItem('content-navigation.contacts.activities');
         $contactActivities->setAction('activities');
+        $contactActivities->setPosition(70);
         $contactActivities->setComponent('activities@suluactivity');
         $contactActivities->setComponentOptions(
-            array('type' => 'contact', 'widgetGroup' => 'contact-detail', 'instanceName' => 'contact-activities')
+            [
+                'type' => 'contact',
+                'widgetGroup' => 'contact-detail',
+                'instanceName' => 'contact-activities'
+            ]
         );
-        $contactActivities->setDisplay(array('edit'));
-        $contactActivities->setPosition(2);
+        $contactActivities->setDisplay(['edit']);
 
-        return array($contactActivities);
+        return [$contactActivities];
     }
 }

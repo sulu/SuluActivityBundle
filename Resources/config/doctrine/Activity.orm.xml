@@ -56,7 +56,7 @@
             </join-columns>
         </many-to-one>
 
-        <many-to-one field="contact" target-entity="Sulu\Bundle\ContactBundle\Entity\Contact">
+        <many-to-one field="contact" target-entity="Sulu\Component\Contact\Model\ContactInterface">
             <join-columns>
                 <join-column name="idContacts" referenced-column-name="id" nullable="true" on-delete="SET NULL"/>
             </join-columns>

@@ -11,9 +11,9 @@
 namespace Sulu\Bundle\ActivityBundle\Entity;
 
 use JMS\Serializer\Annotation\Exclude;
-use Sulu\Bundle\ContactBundle\Entity\Contact;
 use Sulu\Bundle\ContactBundle\Entity\AccountInterface;
 use Sulu\Bundle\CoreBundle\Entity\ApiEntity;
+use Sulu\Component\Contact\Model\ContactInterface;
 use Sulu\Component\Security\Authentication\UserInterface;
 
 /**
@@ -72,7 +72,7 @@ class Activity extends ApiEntity
     private $activityType;
 
     /**
-     * @var Contact
+     * @var ContactInterface
      */
     private $contact;
 
@@ -94,7 +94,7 @@ class Activity extends ApiEntity
     private $creator;
 
     /**
-     * @var Contact
+     * @var ContactInterface
      */
     private $assignedContact;
 
@@ -318,10 +318,10 @@ class Activity extends ApiEntity
     /**
      * Set contact
      *
-     * @param Contact $contact
+     * @param ContactInterface $contact
      * @return Activity
      */
-    public function setContact(Contact $contact = null)
+    public function setContact(ContactInterface $contact = null)
     {
         $this->contact = $contact;
 
@@ -331,7 +331,7 @@ class Activity extends ApiEntity
     /**
      * Get contact
      *
-     * @return Contact
+     * @return ContactInterface
      */
     public function getContact()
     {
@@ -410,10 +410,10 @@ class Activity extends ApiEntity
     /**
      * Set assignedContact
      *
-     * @param Contact $assignedContact
+     * @param ContactInterface $assignedContact
      * @return Activity
      */
-    public function setAssignedContact(Contact $assignedContact)
+    public function setAssignedContact(ContactInterface $assignedContact)
     {
         $this->assignedContact = $assignedContact;
 
@@ -423,7 +423,7 @@ class Activity extends ApiEntity
     /**
      * Get assignedContact
      *
-     * @return Contact
+     * @return ContactInterface
      */
     public function getAssignedContact()
     {

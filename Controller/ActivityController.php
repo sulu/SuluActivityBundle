@@ -11,26 +11,27 @@
 namespace Sulu\Bundle\ActivityBundle\Controller;
 
 use FOS\RestBundle\Routing\ClassResourceInterface;
+use Hateoas\Representation\CollectionRepresentation;
 use JMS\Serializer\SerializationContext;
-use Sulu\Bundle\ActivityBundle\Entity\Activity as ActivityEntity;
 use Sulu\Bundle\ActivityBundle\Api\Activity;
-use Sulu\Bundle\ActivityBundle\Entity\ActivityStatus;
+use Sulu\Bundle\ActivityBundle\Entity\Activity as ActivityEntity;
 use Sulu\Bundle\ActivityBundle\Entity\ActivityPriority;
+use Sulu\Bundle\ActivityBundle\Entity\ActivityStatus;
 use Sulu\Bundle\ActivityBundle\Entity\ActivityType;
-use Sulu\Bundle\ContactBundle\Entity\Contact;
 use Sulu\Bundle\ContactBundle\Entity\AccountInterface;
+use Sulu\Component\Contact\Model\ContactInterface;
+use Sulu\Component\Contact\Model\ContactRepositoryInterface;
 use Sulu\Component\Rest\Exception\EntityNotFoundException;
 use Sulu\Component\Rest\Exception\RestException;
 use Sulu\Component\Rest\ListBuilder\Doctrine\DoctrineListBuilderFactory;
-use Sulu\Component\Rest\RestController;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Sulu\Component\Rest\RestHelperInterface;
-use Hateoas\Representation\CollectionRepresentation;
-use Sulu\Component\Rest\ListBuilder\ListRepresentation;
+use Sulu\Component\Rest\ListBuilder\Doctrine\FieldDescriptor\DoctrineConcatenationFieldDescriptor;
 use Sulu\Component\Rest\ListBuilder\Doctrine\FieldDescriptor\DoctrineFieldDescriptor;
 use Sulu\Component\Rest\ListBuilder\Doctrine\FieldDescriptor\DoctrineJoinDescriptor;
-use Sulu\Component\Rest\ListBuilder\Doctrine\FieldDescriptor\DoctrineConcatenationFieldDescriptor;
+use Sulu\Component\Rest\ListBuilder\ListRepresentation;
+use Sulu\Component\Rest\RestController;
+use Sulu\Component\Rest\RestHelperInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Makes activities available through a REST API
@@ -44,7 +45,6 @@ class ActivityController extends RestController implements ClassResourceInterfac
     protected static $activityStatusEntityName = 'SuluActivityBundle:ActivityStatus';
     protected static $activityTypeEntityName = 'SuluActivityBundle:ActivityType';
     protected static $activityPriorityEntityName = 'SuluActivityBundle:ActivityPriority';
-    protected static $contactEntityName = 'SuluContactBundle:Contact';
     protected $accountEntityName;
 
     /**
@@ -225,12 +225,12 @@ class ActivityController extends RestController implements ClassResourceInterfac
                     new DoctrineFieldDescriptor(
                         'firstName',
                         'firstName',
-                        self::$contactEntityName,
+                        $this->getContactEntityName(),
                         'public.firstName',
                         array(
-                            self::$contactEntityName =>
+                            $this->getContactEntityName() =>
                                 new DoctrineJoinDescriptor(
-                                    self::$contactEntityName,
+                                    $this->getContactEntityName(),
                                     self::$entityName . '.assignedContact'
                                 )
                         )
@@ -238,12 +238,12 @@ class ActivityController extends RestController implements ClassResourceInterfac
                     new DoctrineFieldDescriptor(
                         'lastName',
                         'lastName',
-                        self::$contactEntityName,
+                        $this->getContactEntityName(),
                         'public.lastName',
                         array(
-                            self::$contactEntityName =>
+                            $this->getContactEntityName() =>
                                 new DoctrineJoinDescriptor(
-                                    self::$contactEntityName,
+                                    $this->getContactEntityName(),
                                     self::$entityName . '.assignedContact'
                                 )
                         )
@@ -276,11 +276,11 @@ class ActivityController extends RestController implements ClassResourceInterfac
         $this->joinDescriptors['contact'] = new DoctrineFieldDescriptor(
             'id',
             'contact',
-            self::$contactEntityName . 'contact',
+            $this->getContactEntityName() . 'contact',
             '',
             array(
-                self::$contactEntityName . 'contact' => new DoctrineJoinDescriptor(
-                        self::$contactEntityName . 'contact',
+                $this->getContactEntityName() . 'contact' => new DoctrineJoinDescriptor(
+                        $this->getContactEntityName() . 'contact',
                         self::$entityName . '.contact'
                     )
             ),
@@ -548,11 +548,8 @@ class ActivityController extends RestController implements ClassResourceInterfac
             $activity->setContact(null);
         } else {
             if (!is_null($belongsToContact)) {
-                /* @var Contact $contact */
-                $contact = $this->getEntityById(
-                    self::$contactEntityName,
-                    $belongsToContact['id']
-                );
+                /* @var ContactInterface $contact */
+                $contact = $this->retrieveContactById($belongsToContact['id']);
                 $activity->setContact($contact);
                 $activity->setAccount(null);
             } else {
@@ -610,11 +607,7 @@ class ActivityController extends RestController implements ClassResourceInterfac
         $activity->setDueDate(new \DateTime($dueDate));
 
         if (!is_null($assignedContactData['id'])) {
-            /* @var Contact $assignedContact */
-            $assignedContact = $this->getEntityById(
-                self::$contactEntityName,
-                $assignedContactData['id']
-            );
+            $assignedContact = $this->retrieveContactById($assignedContactData['id']);
             $activity->setAssignedContact($assignedContact);
         }
 
@@ -623,4 +616,36 @@ class ActivityController extends RestController implements ClassResourceInterfac
         $activity->setChanger($this->getUser());
     }
 
+    /**
+     * @param int $id
+     *
+     * @throws EntityNotFoundException
+     *
+     * @return ContactInterface
+     */
+    private function retrieveContactById($id)
+    {
+        $contact = $this->getContactRepository()->find($id);
+        if (!$contact) {
+            throw new EntityNotFoundException($this->getContactEntityName(), $id);
+        }
+
+        return $contact;
+    }
+
+    /**
+     * @return string
+     */
+    private function getContactEntityName()
+    {
+        return $this->getContactRepository()->getClassName();
+    }
+
+    /**
+     * @return ContactRepositoryInterface
+     */
+    private function getContactRepository()
+    {
+        return $this->get('sulu.repository.contact');
+    }
 }

@@ -10,19 +10,19 @@
 
 namespace Sulu\Bundle\ActivityBundle\Api;
 
-use Sulu\Bundle\ContactBundle\Api\Account;
-use Sulu\Bundle\ContactBundle\Api\Contact;
-use Sulu\Bundle\ContactBundle\Entity\AccountInterface as AccountEntity;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\VirtualProperty;
 use Sulu\Bundle\ActivityBundle\Entity\Activity as ActivityEntity;
 use Sulu\Bundle\ActivityBundle\Entity\ActivityPriority as ActivityPriorityEntity;
 use Sulu\Bundle\ActivityBundle\Entity\ActivityStatus as ActivityStatusEntity;
 use Sulu\Bundle\ActivityBundle\Entity\ActivityType as ActivityTypeEntity;
-use Sulu\Bundle\ContactBundle\Entity\Contact as ContactEntity;
+use Sulu\Bundle\ContactBundle\Api\Account;
+use Sulu\Bundle\ContactBundle\Api\Contact;
+use Sulu\Bundle\ContactBundle\Entity\AccountInterface;
+use Sulu\Component\Contact\Model\ContactInterface;
 use Sulu\Component\Rest\ApiWrapper;
-use JMS\Serializer\Annotation\VirtualProperty;
-use JMS\Serializer\Annotation\SerializedName;
-use JMS\Serializer\Annotation\ExclusionPolicy;
-use JMS\Serializer\Annotation\Groups;
 
 /**
  * The Activity class which will be exported to the API
@@ -55,9 +55,8 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Set subject
-     *
      * @param string $subject
+     *
      * @return Activity
      */
     public function setSubject($subject)
@@ -68,12 +67,11 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Get subject
-     *
-     * @return string
      * @VirtualProperty
      * @SerializedName("subject")
      * @Groups({"fullActivity"})
+     *
+     * @return string
      */
     public function getSubject()
     {
@@ -81,9 +79,8 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Set note
-     *
      * @param string $note
+     *
      * @return Activity
      */
     public function setNote($note)
@@ -94,12 +91,11 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Get note
-     *
-     * @return string
      * @VirtualProperty
      * @SerializedName("note")
      * @Groups({"fullActivity"})
+     *
+     * @return string
      */
     public function getNote()
     {
@@ -107,9 +103,8 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Set dueDate
-     *
      * @param \DateTime $dueDate
+     *
      * @return Activity
      */
     public function setDueDate($dueDate)
@@ -120,12 +115,11 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Get dueDate
-     *
-     * @return \DateTime
      * @VirtualProperty
      * @SerializedName("dueDate")
      * @Groups({"fullActivity"})
+     *
+     * @return \DateTime
      */
     public function getDueDate()
     {
@@ -133,9 +127,8 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Set startDate
-     *
      * @param \DateTime $startDate
+     *
      * @return Activity
      */
     public function setStartDate($startDate)
@@ -146,12 +139,11 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Get startDate
-     *
-     * @return \DateTime
      * @VirtualProperty
      * @SerializedName("startDate")
      * @Groups({"fullActivity"})
+     *
+     * @return \DateTime
      */
     public function getStartDate()
     {
@@ -159,9 +151,8 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Set created
-     *
      * @param \DateTime $created
+     *
      * @return Activity
      */
     public function setCreated($created)
@@ -172,12 +163,11 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Get created
-     *
-     * @return \DateTime
      * @VirtualProperty
      * @SerializedName("created")
      * @Groups({"fullActivity"})
+     *
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -185,9 +175,8 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Set changed
-     *
      * @param \DateTime $changed
+     *
      * @return Activity
      */
     public function setChanged($changed)
@@ -198,12 +187,11 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Get changed
-     *
-     * @return \DateTime
      * @VirtualProperty
      * @SerializedName("changed")
      * @Groups({"fullActivity"})
+     *
+     * @return \DateTime
      */
     public function getChanged()
     {
@@ -211,9 +199,8 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Set activityStatus
-     *
      * @param ActivityStatusEntity $activityStatus
+     *
      * @return Activity
      */
     public function setActivityStatus(ActivityStatusEntity $activityStatus = null)
@@ -224,12 +211,11 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Get activityStatus
-     *
-     * @return ActivityStatusEntity
      * @VirtualProperty
      * @SerializedName("activityStatus")
      * @Groups({"fullActivity"})
+     *
+     * @return ActivityStatusEntity
      */
     public function getActivityStatus()
     {
@@ -237,9 +223,8 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Set activityPriority
-     *
      * @param ActivityPriorityEntity $activityPriority
+     *
      * @return Activity
      */
     public function setActivityPriority(ActivityPriorityEntity $activityPriority = null)
@@ -250,12 +235,11 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Get activityPriority
-     *
-     * @return ActivityPriorityEntity
      * @VirtualProperty
      * @SerializedName("activityPriority")
      * @Groups({"fullActivity"})
+     *
+     * @return ActivityPriorityEntity
      */
     public function getActivityPriority()
     {
@@ -263,9 +247,8 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Set activityType
-     *
      * @param ActivityTypeEntity $activityType
+     *
      * @return Activity
      */
     public function setActivityType(ActivityTypeEntity $activityType = null)
@@ -276,12 +259,11 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Get activityType
-     *
-     * @return ActivityTypeEntity
      * @VirtualProperty
      * @SerializedName("activityType")
      * @Groups({"fullActivity"})
+     *
+     * @return ActivityTypeEntity
      */
     public function getActivityType()
     {
@@ -289,12 +271,11 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Set contact
+     * @param ContactInterface $contact
      *
-     * @param ContactEntity $contact
      * @return Activity
      */
-    public function setContact(ContactEntity $contact = null)
+    public function setContact(ContactInterface $contact = null)
     {
         $this->entity->setContact($contact);
 
@@ -302,12 +283,11 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Get contact
-     *
-     * @return ContactEntity
      * @VirtualProperty
      * @SerializedName("contact")
      * @Groups({"fullActivity"})
+     *
+     * @return ContactInterface
      */
     public function getContact()
     {
@@ -321,12 +301,11 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Set account
+     * @param AccountInterface $account
      *
-     * @param AccountEntity $account
      * @return Activity
      */
-    public function setAccount(AccountEntity $account = null)
+    public function setAccount(AccountInterface $account = null)
     {
         $this->entity->setAccount($account);
 
@@ -334,12 +313,11 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Get account
-     *
-     * @return AccountEntity
      * @VirtualProperty
      * @SerializedName("account")
      * @Groups({"fullActivity"})
+     *
+     * @return AccountInterface
      */
     public function getAccount()
     {
@@ -352,12 +330,11 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Set assignedContact
+     * @param ContactInterface $assignedContact
      *
-     * @param ContactEntity $assignedContact
      * @return Activity
      */
-    public function setAssignedContact(ContactEntity $assignedContact)
+    public function setAssignedContact(ContactInterface $assignedContact)
     {
         $this->entity->setAssignedContact($assignedContact);
 
@@ -365,12 +342,11 @@ class Activity extends ApiWrapper
     }
 
     /**
-     * Get assignedContact
-     *
-     * @return ContactEntity
      * @VirtualProperty
      * @SerializedName("assignedContact")
      * @Groups({"fullActivity"})
+     *
+     * @return ContactInterface
      */
     public function getAssignedContact()
     {

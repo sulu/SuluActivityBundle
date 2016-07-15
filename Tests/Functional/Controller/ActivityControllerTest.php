@@ -14,7 +14,6 @@ use Doctrine\ORM\EntityManager;
 
 use Sulu\Bundle\ContactBundle\Entity\AccountInterface;
 use Sulu\Bundle\ContactBundle\Entity\Account;
-use Sulu\Bundle\ContactBundle\Entity\Contact;
 use Sulu\Bundle\ContactBundle\Entity\Email;
 use Sulu\Bundle\ContactBundle\Entity\EmailType;
 use Sulu\Bundle\ActivityBundle\Entity\Activity;
@@ -103,7 +102,7 @@ class ActivityControllerTest extends SuluTestCase
         $email->setEmailType($emailType);
         $account->addEmail($email);
 
-        $contact = new Contact();
+        $contact = $this->getContainer()->get('sulu.repository.contact')->createNew();
         $contact->setFirstName("Vorname");
         $contact->setLastName("Nachname");
         $contact->setMiddleName("Mittelname");

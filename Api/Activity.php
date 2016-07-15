@@ -44,10 +44,11 @@ class Activity extends ApiWrapper
     /**
      * Returns the id of the product
      *
-     * @return int
      * @VirtualProperty
      * @SerializedName("id")
      * @Groups({"fullActivity"})
+     *
+     * @return int
      */
     public function getId()
     {
@@ -57,7 +58,7 @@ class Activity extends ApiWrapper
     /**
      * @param string $subject
      *
-     * @return Activity
+     * @return self
      */
     public function setSubject($subject)
     {
@@ -81,7 +82,7 @@ class Activity extends ApiWrapper
     /**
      * @param string $note
      *
-     * @return Activity
+     * @return self
      */
     public function setNote($note)
     {
@@ -105,7 +106,7 @@ class Activity extends ApiWrapper
     /**
      * @param \DateTime $dueDate
      *
-     * @return Activity
+     * @return self
      */
     public function setDueDate($dueDate)
     {
@@ -129,7 +130,7 @@ class Activity extends ApiWrapper
     /**
      * @param \DateTime $startDate
      *
-     * @return Activity
+     * @return self
      */
     public function setStartDate($startDate)
     {
@@ -153,7 +154,7 @@ class Activity extends ApiWrapper
     /**
      * @param \DateTime $created
      *
-     * @return Activity
+     * @return self
      */
     public function setCreated($created)
     {
@@ -177,7 +178,7 @@ class Activity extends ApiWrapper
     /**
      * @param \DateTime $changed
      *
-     * @return Activity
+     * @return self
      */
     public function setChanged($changed)
     {
@@ -201,7 +202,7 @@ class Activity extends ApiWrapper
     /**
      * @param ActivityStatusEntity $activityStatus
      *
-     * @return Activity
+     * @return self
      */
     public function setActivityStatus(ActivityStatusEntity $activityStatus = null)
     {
@@ -225,7 +226,7 @@ class Activity extends ApiWrapper
     /**
      * @param ActivityPriorityEntity $activityPriority
      *
-     * @return Activity
+     * @return self
      */
     public function setActivityPriority(ActivityPriorityEntity $activityPriority = null)
     {
@@ -249,7 +250,7 @@ class Activity extends ApiWrapper
     /**
      * @param ActivityTypeEntity $activityType
      *
-     * @return Activity
+     * @return self
      */
     public function setActivityType(ActivityTypeEntity $activityType = null)
     {
@@ -273,7 +274,7 @@ class Activity extends ApiWrapper
     /**
      * @param ContactInterface $contact
      *
-     * @return Activity
+     * @return self
      */
     public function setContact(ContactInterface $contact = null)
     {
@@ -287,11 +288,10 @@ class Activity extends ApiWrapper
      * @SerializedName("contact")
      * @Groups({"fullActivity"})
      *
-     * @return ContactInterface
+     * @return Contact|null
      */
     public function getContact()
     {
-
         $contact = $this->entity->getContact();
         if ($contact) {
             return new Contact($contact, $this->locale);
@@ -303,7 +303,7 @@ class Activity extends ApiWrapper
     /**
      * @param AccountInterface $account
      *
-     * @return Activity
+     * @return self
      */
     public function setAccount(AccountInterface $account = null)
     {
@@ -317,7 +317,7 @@ class Activity extends ApiWrapper
      * @SerializedName("account")
      * @Groups({"fullActivity"})
      *
-     * @return AccountInterface
+     * @return Account|null
      */
     public function getAccount()
     {
@@ -332,7 +332,7 @@ class Activity extends ApiWrapper
     /**
      * @param ContactInterface $assignedContact
      *
-     * @return Activity
+     * @return self
      */
     public function setAssignedContact(ContactInterface $assignedContact)
     {
@@ -346,7 +346,7 @@ class Activity extends ApiWrapper
      * @SerializedName("assignedContact")
      * @Groups({"fullActivity"})
      *
-     * @return ContactInterface
+     * @return Contact|null
      */
     public function getAssignedContact()
     {

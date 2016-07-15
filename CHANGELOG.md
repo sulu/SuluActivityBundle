@@ -1,5 +1,5 @@
-CHANGELOG for Massive Purchase
-==============================
+CHANGELOG for Sulu Activity Bundle
+==================================
 
 * 0.3.0 (2016-07-15)
 

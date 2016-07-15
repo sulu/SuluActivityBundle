@@ -32,6 +32,7 @@ use Sulu\Component\Rest\RestController;
 use Sulu\Component\Rest\RestHelperInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Makes activities available through a REST API
@@ -72,14 +73,14 @@ class ActivityController extends RestController implements ClassResourceInterfac
 
         $this->accountEntityName = $this->container->getParameter('sulu_contact.account.entity');
 
-        $this->fieldDescriptors = array();
-        $this->joinDescriptors = array();
+        $this->fieldDescriptors = [];
+        $this->joinDescriptors = [];
         $this->fieldDescriptors['id'] = new DoctrineFieldDescriptor(
             'id',
             'id',
             self::$entityName,
             'public.id',
-            array(),
+            [],
             true,
             false,
             '',
@@ -92,7 +93,7 @@ class ActivityController extends RestController implements ClassResourceInterfac
             'subject',
             self::$entityName,
             'contact.activities.subject',
-            array(),
+            [],
             false,
             true,
             '',
@@ -105,7 +106,7 @@ class ActivityController extends RestController implements ClassResourceInterfac
             'note',
             self::$entityName,
             'contact.activities.note',
-            array(),
+            [],
             true,
             false,
             '',
@@ -118,7 +119,7 @@ class ActivityController extends RestController implements ClassResourceInterfac
             'dueDate',
             self::$entityName,
             'contact.activities.dueDate',
-            array(),
+            [],
             false,
             true,
             'date',
@@ -131,7 +132,7 @@ class ActivityController extends RestController implements ClassResourceInterfac
             'startDate',
             self::$entityName,
             'contact.activities.startDate',
-            array(),
+            [],
             true,
             false,
             'date',
@@ -144,7 +145,7 @@ class ActivityController extends RestController implements ClassResourceInterfac
             'created',
             self::$entityName,
             'public.created',
-            array(),
+            [],
             true,
             false,
             'date',
@@ -157,7 +158,7 @@ class ActivityController extends RestController implements ClassResourceInterfac
             'changed',
             self::$entityName,
             'public.changed',
-            array(),
+            [],
             true,
             false,
             'date',
@@ -170,12 +171,12 @@ class ActivityController extends RestController implements ClassResourceInterfac
             'activityStatus',
             self::$activityStatusEntityName,
             'contact.activities.status',
-            array(
+            [
                 self::$activityStatusEntityName => new DoctrineJoinDescriptor(
-                        self::$activityStatusEntityName,
-                        self::$entityName . '.activityStatus'
-                    )
-            ),
+                    self::$activityStatusEntityName,
+                    self::$entityName . '.activityStatus'
+                ),
+            ],
             false,
             true,
             'translation',
@@ -188,12 +189,12 @@ class ActivityController extends RestController implements ClassResourceInterfac
             'activityPriority',
             self::$activityPriorityEntityName,
             'contact.activities.priority',
-            array(
+            [
                 self::$activityPriorityEntityName => new DoctrineJoinDescriptor(
-                        self::$activityPriorityEntityName,
-                        self::$entityName . '.activityPriority'
-                    )
-            ),
+                    self::$activityPriorityEntityName,
+                    self::$entityName . '.activityPriority'
+                ),
+            ],
             false,
             true,
             'translation',
@@ -206,12 +207,12 @@ class ActivityController extends RestController implements ClassResourceInterfac
             'activityType',
             self::$activityTypeEntityName,
             'contact.activities.type',
-            array(
+            [
                 self::$activityTypeEntityName => new DoctrineJoinDescriptor(
-                        self::$activityTypeEntityName,
-                        self::$entityName . '.activityType'
-                    )
-            ),
+                    self::$activityTypeEntityName,
+                    self::$entityName . '.activityType'
+                ),
+            ],
             true,
             false,
             'translation',
@@ -221,34 +222,34 @@ class ActivityController extends RestController implements ClassResourceInterfac
         );
         $this->fieldDescriptors['assignedContact'] =
             new DoctrineConcatenationFieldDescriptor(
-                array(
+                [
                     new DoctrineFieldDescriptor(
                         'firstName',
                         'firstName',
                         $this->getContactEntityName(),
                         'public.firstName',
-                        array(
+                        [
                             $this->getContactEntityName() =>
                                 new DoctrineJoinDescriptor(
                                     $this->getContactEntityName(),
                                     self::$entityName . '.assignedContact'
-                                )
-                        )
+                                ),
+                        ]
                     ),
                     new DoctrineFieldDescriptor(
                         'lastName',
                         'lastName',
                         $this->getContactEntityName(),
                         'public.lastName',
-                        array(
+                        [
                             $this->getContactEntityName() =>
                                 new DoctrineJoinDescriptor(
                                     $this->getContactEntityName(),
                                     self::$entityName . '.assignedContact'
-                                )
-                        )
-                    )
-                ),
+                                ),
+                        ]
+                    ),
+                ],
                 'assignedContact',
                 'contact.activities.assignedContact',
                 ' ',
@@ -264,12 +265,12 @@ class ActivityController extends RestController implements ClassResourceInterfac
             'account',
             $this->accountEntityName,
             '',
-            array(
+            [
                 $this->accountEntityName => new DoctrineJoinDescriptor(
-                        $this->accountEntityName,
-                        self::$entityName . '.account'
-                    )
-            ),
+                    $this->accountEntityName,
+                    self::$entityName . '.account'
+                ),
+            ],
             '',
             false
         );
@@ -278,20 +279,20 @@ class ActivityController extends RestController implements ClassResourceInterfac
             'contact',
             $this->getContactEntityName() . 'contact',
             '',
-            array(
+            [
                 $this->getContactEntityName() . 'contact' => new DoctrineJoinDescriptor(
-                        $this->getContactEntityName() . 'contact',
-                        self::$entityName . '.contact'
-                    )
-            ),
+                    $this->getContactEntityName() . 'contact',
+                    self::$entityName . '.contact'
+                ),
+            ],
             false
         );
     }
 
     /**
-     * returns all fields that can be used by list
+     * Returns all fields that can be used by list.
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function fieldsAction()
     {
@@ -301,10 +302,11 @@ class ActivityController extends RestController implements ClassResourceInterfac
     }
 
     /**
-     * Shows a single activity with the given id
+     * Shows a single activity with the given id.
      *
-     * @param $id
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param int $id
+     *
+     * @return Response
      */
     public function getAction($id)
     {
@@ -321,7 +323,8 @@ class ActivityController extends RestController implements ClassResourceInterfac
     }
 
     /**
-     * lists all activities
+     * Lists all activities.
+     *
      * optional parameter 'flat' calls listAction
      * optional parameter 'contact' calls listAction for all activities for a
      *  contact (in combination with flat)
@@ -329,7 +332,8 @@ class ActivityController extends RestController implements ClassResourceInterfac
      *  account (in combination with flat)
      *
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @return Response
      */
     public function cgetAction(Request $request)
     {
@@ -351,7 +355,6 @@ class ActivityController extends RestController implements ClassResourceInterfac
         }
 
         if ($request->get('flat') == 'true') {
-
             /** @var RestHelperInterface $restHelper */
             $restHelper = $this->get('sulu_core.doctrine_rest_helper');
 
@@ -378,7 +381,6 @@ class ActivityController extends RestController implements ClassResourceInterfac
                 $listBuilder->getLimit(),
                 $listBuilder->count()
             );
-
         } else {
             $activities = $this->getDoctrine()->getRepository(
                 self::$entityName
@@ -392,11 +394,12 @@ class ActivityController extends RestController implements ClassResourceInterfac
     }
 
     /**
-     * Updates an activity with a given id
+     * Updates an activity with a given id.
      *
-     * @param $id
+     * @param int $id
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @return Response
      */
     public function putAction($id, Request $request)
     {
@@ -430,10 +433,11 @@ class ActivityController extends RestController implements ClassResourceInterfac
     }
 
     /**
-     * Deletes an activity with a given id
+     * Deletes an activity with a given id.
      *
-     * @param $id
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param int $id
+     *
+     * @return Response
      */
     public function deleteAction($id)
     {
@@ -450,10 +454,11 @@ class ActivityController extends RestController implements ClassResourceInterfac
     }
 
     /**
-     * Creates a new activity
+     * Creates a new activity.
      *
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @return Response
      */
     public function postAction(Request $request)
     {
@@ -490,10 +495,11 @@ class ActivityController extends RestController implements ClassResourceInterfac
     }
 
     /**
-     * Processes the data for an activity from an request
+     * Processes the data for an activity from an request.
      *
      * @param ActivityEntity $activity
      * @param Request $request
+     *
      * @throws RestException
      */
     protected function processActivityData(ActivityEntity $activity, Request $request)
@@ -547,26 +553,27 @@ class ActivityController extends RestController implements ClassResourceInterfac
             $activity->setAccount($account);
             $activity->setContact(null);
         } else {
-            if (!is_null($belongsToContact)) {
-                /* @var ContactInterface $contact */
-                $contact = $this->retrieveContactById($belongsToContact['id']);
-                $activity->setContact($contact);
-                $activity->setAccount(null);
-            } else {
+            if (is_null($belongsToContact)) {
                 throw new RestException(
                     'No account or contact set!'
                 );
             }
+            /* @var ContactInterface $contact */
+            $contact = $this->retrieveContactById($belongsToContact['id']);
+            $activity->setContact($contact);
+            $activity->setAccount(null);
         }
     }
 
     /**
-     * Returns an entity for a specific id
+     * Returns an entity for a specific id.
      *
      * @param string $entityName
-     * @param $id
+     * @param int $id
+     *
+     * @throws EntityNotFoundException
+     *
      * @return mixed
-     * @throws \Sulu\Component\Rest\Exception\EntityNotFoundException
      */
     protected function getEntityById($entityName, $id)
     {
@@ -581,11 +588,12 @@ class ActivityController extends RestController implements ClassResourceInterfac
     }
 
     /**
-     * Sets required data for an activity
+     * Sets required data for an activity.
      *
-     * @param $activity
-     * @param $request
-     * @throws \Sulu\Component\Rest\Exception\RestException
+     * @param ActivityEntity $activity
+     * @param Request $request
+     *
+     * @throws RestException
      */
     private function processRequiredData(ActivityEntity $activity, Request $request)
     {
@@ -617,6 +625,8 @@ class ActivityController extends RestController implements ClassResourceInterfac
     }
 
     /**
+     * Returns contact by id and throws exception if not found.
+     *
      * @param int $id
      *
      * @throws EntityNotFoundException

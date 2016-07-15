@@ -11,9 +11,9 @@
 namespace Sulu\Bundle\ActivityBundle\Entity;
 
 use JMS\Serializer\Annotation\Exclude;
-use Sulu\Bundle\ContactBundle\Entity\Contact;
 use Sulu\Bundle\ContactBundle\Entity\AccountInterface;
 use Sulu\Bundle\CoreBundle\Entity\ApiEntity;
+use Sulu\Component\Contact\Model\ContactInterface;
 use Sulu\Component\Security\Authentication\UserInterface;
 
 /**
@@ -72,7 +72,7 @@ class Activity extends ApiEntity
     private $activityType;
 
     /**
-     * @var Contact
+     * @var ContactInterface
      */
     private $contact;
 
@@ -94,15 +94,14 @@ class Activity extends ApiEntity
     private $creator;
 
     /**
-     * @var Contact
+     * @var ContactInterface
      */
     private $assignedContact;
 
     /**
-     * Set subject
-     *
      * @param string $subject
-     * @return Activity
+     *
+     * @return self
      */
     public function setSubject($subject)
     {
@@ -112,8 +111,6 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Get subject
-     *
      * @return string
      */
     public function getSubject()
@@ -122,9 +119,8 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Set note
-     *
      * @param string $note
+     *
      * @return Activity
      */
     public function setNote($note)
@@ -135,8 +131,6 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Get note
-     *
      * @return string
      */
     public function getNote()
@@ -145,9 +139,8 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Set dueDate
-     *
      * @param \DateTime $dueDate
+     *
      * @return Activity
      */
     public function setDueDate($dueDate)
@@ -158,8 +151,6 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Get dueDate
-     *
      * @return \DateTime
      */
     public function getDueDate()
@@ -168,10 +159,9 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Set startDate
-     *
      * @param \DateTime $startDate
-     * @return Activity
+     *
+     * @return self
      */
     public function setStartDate($startDate)
     {
@@ -181,8 +171,6 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Get startDate
-     *
      * @return \DateTime
      */
     public function getStartDate()
@@ -191,10 +179,9 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Set created
-     *
      * @param \DateTime $created
-     * @return Activity
+     *
+     * @return self
      */
     public function setCreated($created)
     {
@@ -204,8 +191,6 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Get created
-     *
      * @return \DateTime
      */
     public function getCreated()
@@ -214,10 +199,9 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Set changed
-     *
      * @param \DateTime $changed
-     * @return Activity
+     *
+     * @return self
      */
     public function setChanged($changed)
     {
@@ -227,8 +211,6 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Get changed
-     *
      * @return \DateTime
      */
     public function getChanged()
@@ -237,9 +219,7 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Get id
-     *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -247,10 +227,9 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Set activityStatus
-     *
      * @param ActivityStatus $activityStatus
-     * @return Activity
+     *
+     * @return self
      */
     public function setActivityStatus(ActivityStatus $activityStatus = null)
     {
@@ -260,8 +239,6 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Get activityStatus
-     *
      * @return ActivityStatus
      */
     public function getActivityStatus()
@@ -270,10 +247,9 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Set activityPriority
-     *
      * @param ActivityPriority $activityPriority
-     * @return Activity
+     *
+     * @return self
      */
     public function setActivityPriority(ActivityPriority $activityPriority = null)
     {
@@ -283,8 +259,6 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Get activityPriority
-     *
      * @return ActivityPriority
      */
     public function getActivityPriority()
@@ -293,10 +267,9 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Set activityType
-     *
      * @param ActivityType $activityType
-     * @return Activity
+     *
+     * @return self
      */
     public function setActivityType(ActivityType $activityType = null)
     {
@@ -306,8 +279,6 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Get activityType
-     *
      * @return ActivityType
      */
     public function getActivityType()
@@ -316,12 +287,11 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Set contact
+     * @param ContactInterface $contact
      *
-     * @param Contact $contact
-     * @return Activity
+     * @return self
      */
-    public function setContact(Contact $contact = null)
+    public function setContact(ContactInterface $contact = null)
     {
         $this->contact = $contact;
 
@@ -329,9 +299,7 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Get contact
-     *
-     * @return Contact
+     * @return ContactInterface
      */
     public function getContact()
     {
@@ -339,10 +307,9 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Set account
-     *
      * @param AccountInterface $account
-     * @return Activity
+     *
+     * @return self
      */
     public function setAccount(AccountInterface $account = null)
     {
@@ -362,10 +329,9 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Set changer
-     *
      * @param UserInterface $changer
-     * @return Activity
+     *
+     * @return self
      */
     public function setChanger(UserInterface $changer = null)
     {
@@ -375,8 +341,6 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Get changer
-     *
      * @return UserInterface
      */
     public function getChanger()
@@ -385,10 +349,9 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Set creator
-     *
      * @param UserInterface $creator
-     * @return Activity
+     *
+     * @return self
      */
     public function setCreator(UserInterface $creator = null)
     {
@@ -398,8 +361,6 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Get creator
-     *
      * @return UserInterface
      */
     public function getCreator()
@@ -408,12 +369,11 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Set assignedContact
+     * @param ContactInterface $assignedContact
      *
-     * @param Contact $assignedContact
-     * @return Activity
+     * @return self
      */
-    public function setAssignedContact(Contact $assignedContact)
+    public function setAssignedContact(ContactInterface $assignedContact)
     {
         $this->assignedContact = $assignedContact;
 
@@ -421,9 +381,7 @@ class Activity extends ApiEntity
     }
 
     /**
-     * Get assignedContact
-     *
-     * @return Contact
+     * @return ContactInterface
      */
     public function getAssignedContact()
     {
